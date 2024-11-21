@@ -1,0 +1,43 @@
+<odoo>
+    <record id="treatment_general_consultation" model="hospital.treatment">
+        <field name="name">General Consultation</field>
+        <field name="description">Routine check-ups and diagnosis</field>
+    </record>
+    <record id="treatment_dental_care" model="hospital.treatment">
+        <field name="name">Dental Care</field>
+        <field name="description">Dental check-ups, cleaning, and procedures</field>
+    </record>
+    <record id="treatment_cardiology" model="hospital.treatment">
+        <field name="name">Cardiology</field>
+        <field name="description">Heart-related diagnosis and treatments</field>
+    </record>
+    <record id="treatment_dermatology" model="hospital.treatment">
+        <field name="name">Dermatology</field>
+        <field name="description">Skin-related consultations and treatments</field>
+    </record>
+    <record id="treatment_pediatrics" model="hospital.treatment">
+        <field name="name">Pediatrics</field>
+        <field name="description">Child healthcare and wellness services</field>
+    </record>
+    <record id="treatment_radiology" model="hospital.treatment">
+        <field name="name">Radiology</field>
+        <field name="description">Imaging services such as X-rays and MRIs</field>
+    </record>
+    <record id="treatment_orthopedics" model="hospital.treatment">
+        <field name="name">Orthopedics</field>
+        <field name="description">Bone and joint care, including fractures</field>
+    </record>
+    <record id="treatment_psychotherapy" model="hospital.treatment">
+        <field name="name">Psychotherapy</field>
+        <field name="description">Mental health and counseling sessions</field>
+    </record>
+    <record id="treatment_oncology" model="hospital.treatment">
+        <field name="name">Oncology</field>
+        <field name="description">Cancer diagnosis and treatment plans</field>
+    </record>
+    <record id="treatment_obstetrics_gynecology" model="hospital.treatment">
+        <field name="name">Obstetrics and Gynecology</field>
+        <field name="description">Pregnancy care and women's health services</field>
+    </record>
+
+</odoo>
