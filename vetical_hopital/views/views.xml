@@ -88,7 +88,8 @@
     </record>
 
     <!-- Menú principal de gestión hospitalaria -->
-    <menuitem id="menu_hospital_patient_root" name="Hospital Management"/>
+    <menuitem id="menu_hospital_patient_root" name="Patients"/>
     <!-- Submenú para pacientes bajo el menú principal -->
     <menuitem id="menu_hospital_patient" name="Patients" parent="menu_hospital_patient_root" action="action_hospital_patient"/>
+
 </odoo>

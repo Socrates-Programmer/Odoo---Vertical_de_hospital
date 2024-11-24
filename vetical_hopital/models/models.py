@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#Models de Patients:
 from odoo import models, fields, api, _ 
 from odoo.exceptions import ValidationError
 import re
@@ -143,3 +144,27 @@ class HospitalPatient(models.Model):
         """Cambia el estado a 'discharged'."""
         self.write({'state': 'discharged'})
 #Cambiar estados END
+
+#---------------------
+
+#Models de treatments:
+
+# -*- coding: utf-8 -*-
+class TreatmentManagement(models.Model):
+    _name = 'treatment.management'
+    _description = 'Treatment Management'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
+    code = fields.Char(string="Código de Tratamiento", required=True, track_visibility="onchange")
+    name = fields.Char(string="Nombre del Tratamiento", required=True, track_visibility="onchange")
+    doctor = fields.Char(string="Médico Tratante", required=True, track_visibility="onchange")
+    description = fields.Text(string="Descripción", track_visibility="onchange")  # Campo agregado
+
+    @api.constrains('code')
+    def _check_code_restriction(self):
+        """Restringe que el código no contenga la secuencia '026'."""
+        for record in self:
+            if '026' in record.code:
+                raise ValidationError("El código no puede contener la secuencia '026'.")
+
+

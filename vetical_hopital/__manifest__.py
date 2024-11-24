@@ -24,6 +24,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/views.xml',
+        'views/views_treatments.xml',
         'data/sequences.xml',
         'data/hospital_treatment_data.xml',
     ],

@@ -1,94 +1,50 @@
 <odoo>
-    <!-- 1.4 Tratamientos -->
-
-<!-- Vista de formulario para hospital.patient -->
-<record id="view_hospital_patient_form" model="ir.ui.view">
-    <field name="name">hospital.patient.form</field>
-    <field name="model">hospital.patient</field>
-    <field name="type">form</field> <!-- Tipo de vista -->
-    <field name="arch" type="xml">
-        <form string="Patient Form">
-            <sheet>
-                <!-- Información básica del paciente -->
-                <group string="Información Básica" col="2">
-                    <!-- ID del paciente, de solo lectura -->
-                    <field name="name" readonly="1"/>
-                    <!-- Nombre -->
-                    <field name="full_name" placeholder="Ingrese el primer nombre" help="Solo se permiten letras, tildes, ñ y espacios"/>
-                    <!-- Apellido -->
-                    <field name="last_name" placeholder="Ingrese el apellido" help="Solo se permiten letras, tildes, ñ y espacios"/>
-                    <!-- Identificación RNC -->
-                    <field name="rnc" placeholder="Ingrese el RNC"/>
-                </group>
-
-                <!-- Información adicional -->
-                <group string="Tratamientos y Fechas" col="2">
-                    <!-- Relación Many2many con hospital.treatment -->
-                    <field name="treatment_ids" widget="many2many_tags" placeholder="Seleccione tratamientos"/>
-                    <!-- Fechas de admisión y última actualización -->
-                    <field name="date_time_admission" placeholder="Seleccione la fecha de admisión"/>
-                    <field name="date_time_update" readonly="1"/>
-                </group>
-
-                <!-- Estado del paciente -->
-                <group string="Estado">
-                    <!-- Barra de estado para visualizar el estado del paciente -->
-                    <field name="state" widget="statusbar" clickable="True"/>
-                    
-                    <!-- Botones para cambiar el estado -->
-                    <button name="action_admit" string="Admitir" type="object" class="oe_highlight"
-                            invisible="state == 'admitted'"/>
-                    <button name="action_discharge" string="Dar de alta" type="object" class="oe_highlight"
-                            invisible="state == 'discharged'"/>
-                </group>
-                <!-- Estado del paciente END -->
-
-
-            </sheet>
-
-            <!-- Chatter (seguimiento de mensajes y seguidores) -->
-            <div class="oe_chatter">
-                <field name="message_follower_ids" widget="mail_followers" readonly="1"/>
-                <field name="message_ids" widget="mail_thread" readonly="1"/>
-            </div>
-
-        </form>
-    </field>
-</record>
-<!-- Vista de formulario para hospital.patient END-->
-
-
-
-    <!-- Vista de lista -->
-    <record id="view_hospital_patient_list" model="ir.ui.view">
-        <field name="name">hospital.patient.list</field>
-        <field name="model">hospital.patient</field>
-        <field name="type">list</field> <!-- Cambiado a "list" -->
+    <!-- Vista de formulario para tratamientos -->
+    <record id="view_treatment_management_form" model="ir.ui.view">
+        <field name="name">treatment.management.form</field>
+        <field name="model">treatment.management</field>
+        <field name="type">form</field>
         <field name="arch" type="xml">
-            <list string="Patient List">
-                <!-- ID del paciente -->
+            <form string="Formulario de Tratamientos">
+                <sheet>
+                    <group string="Información del Tratamiento">
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="doctor"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" readonly="1"/>
+                    <field name="message_ids" widget="mail_thread" readonly="1"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista de lista para tratamientos -->
+    <record id="view_treatment_management_list" model="ir.ui.view">
+        <field name="name">treatment.management.list</field>
+        <field name="model">treatment.management</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list string="Lista de Tratamientos">
+                <field name="code"/>
                 <field name="name"/>
-                <!-- Nombre completo -->
-                <field name="full_name"/>
-                <field name="last_name"/>
-                <!-- Identificación RNC -->
-                <field name="rnc"/>
-                <!-- Estado del paciente -->
-                <field name="state"/>
+                <field name="doctor"/>
             </list>
         </field>
     </record>
 
-
-    <!-- Acción para abrir hospital.patient en vistas de lista y formulario -->
-    <record id="action_hospital_patient" model="ir.actions.act_window">
-        <field name="name">Patients</field>
-        <field name="res_model">hospital.patient</field>
-        <field name="view_mode">list,form</field> <!-- Cambiado a "list,form" -->
+    <!-- Acción para tratamientos -->
+    <record id="action_treatment_management" model="ir.actions.act_window">
+        <field name="name">Treatments</field>
+        <field name="res_model">treatment.management</field>
+        <field name="view_mode">list,form</field>
     </record>
 
-    <!-- Menú principal de gestión hospitalaria -->
-    <menuitem id="menu_hospital_patient_root" name="Hospital Management"/>
-    <!-- Submenú para pacientes bajo el menú principal -->
-    <menuitem id="menu_hospital_patient" name="Patients" parent="menu_hospital_patient_root" action="action_hospital_patient"/>
+    <!-- Menú raíz para Hospital Management -->
+    <menuitem id="menu_hospital_root" name="Treatments" sequence="1"/>
+
+    <!-- Submenú para tratamientos -->
+    <menuitem id="menu_treatment_root" name="Treatments" parent="menu_hospital_root" sequence="2" action="action_treatment_management"/>
 </odoo>
