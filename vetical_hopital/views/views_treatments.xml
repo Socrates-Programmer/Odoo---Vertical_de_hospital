@@ -47,4 +47,5 @@
 
     <!-- Submenú para tratamientos -->
     <menuitem id="menu_treatment_root" name="Treatments" parent="menu_hospital_root" sequence="2" action="action_treatment_management"/>
+
 </odoo>

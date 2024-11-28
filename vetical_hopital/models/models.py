@@ -76,21 +76,33 @@ class HospitalPatient(models.Model):
         default="draft", 
         tracking=True
     )
+
+    @api.depends('treatment_ids')
+    def _compute_treatment_names(self):
+        for record in self:
+            record.treatment_names = ', '.join(record.treatment_ids.mapped('name'))
+
+    treatment_names = fields.Char(
+        string="Treatment Names",
+        compute="_compute_treatment_names",
+        store=True,
+    )
     
-    # Modelo tratamientos
-    class HospitalTreatment(models.Model):
-        _name = 'hospital.treatment'
-        _description = 'Hospital Treatment'
+    def print_report(self):
+        # Filtrar los pacientes seleccionados
+        selected_patients = self.env.context.get('active_ids', [])
+        patients = self.browse(selected_patients)
+        
+        # Generar el reporte para los pacientes seleccionados
+        return self.env.ref('vetical_hopital.report_hospital_patient').report_action(patients)
 
-        name = fields.Char(
-            string="Treatment Name",
-            required=True
-        )
-        description = fields.Text(
-            string="Description"
-        )
-
-    # Métodos
+    @api.model
+    def create(self, vals):
+        """Override the create method to set the sequence number"""
+        if vals.get('name', _('New')) == _('New'):
+            # Obtener el siguiente número de la secuencia
+            vals['name'] = self.env['ir.sequence'].next_by_code('hospital.patient') or _('New')
+        return super(HospitalPatient, self).create(vals)
     
 #Nombre y apellidos solo pueden usar letras
     @api.constrains('full_name', 'last_name')
@@ -118,14 +130,7 @@ class HospitalPatient(models.Model):
 #RNC solo puede tener numeros END
 
 
-# Crear el ID automáticamente
-    @api.model
-    def create(self, vals):
-        if vals.get('name', _('New')) == _('New'):
-            # Usar la secuencia definida
-            vals['name'] = self.env['ir.sequence'].next_by_code('hospital.patient') or _('New')
-        return super(HospitalPatient, self).create(vals)
-# Crear el ID automáticamente END
+
 
 # Actualizar la fecha de modificación al editar cualquier campo
     def write(self, vals):
@@ -144,6 +149,21 @@ class HospitalPatient(models.Model):
         """Cambia el estado a 'discharged'."""
         self.write({'state': 'discharged'})
 #Cambiar estados END
+
+#---------------------
+
+# Modelo tratamientos
+class HospitalTreatment(models.Model):
+    _name = 'hospital.treatment'
+    _description = 'Hospital Treatment'
+
+    name = fields.Char(
+        string="Treatment Name",
+        required=True
+    )
+    description = fields.Text(
+        string="Description"
+    )
 
 #---------------------
 
@@ -166,5 +186,3 @@ class TreatmentManagement(models.Model):
         for record in self:
             if '026' in record.code:
                 raise ValidationError("El código no puede contener la secuencia '026'.")
-
-

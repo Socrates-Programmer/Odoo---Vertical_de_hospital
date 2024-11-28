@@ -1,9 +1,0 @@
-<odoo>
-    <!-- Opcional: Registro de un ejemplo inicial -->
-    <record id="treatment_example" model="treatment.management">
-        <field name="code">TRT001</field>
-        <field name="name">Example Treatment</field>
-        <field name="doctor">Dr. Smith</field>
-        <field name="description">This is an example treatment.</field>
-    </record>
-</odoo>

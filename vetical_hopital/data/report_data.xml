@@ -1,0 +1,8 @@
+<odoo>
+    <data noupdate="1">
+        <record id="model_hospital_patient" model="ir.model">
+            <field name="name">Hospital Patient</field>
+            <field name="model">hospital.patient</field>
+        </record>
+    </data>
+</odoo>

@@ -21,13 +21,16 @@
     'depends': ['base', 'mail'],
 
     # always loaded
-    'data': [
-        'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/views_treatments.xml',
-        'data/sequences.xml',
-        'data/hospital_treatment_data.xml',
-    ],
+'data': [
+    'security/ir.model.access.csv',
+    'views/views.xml',
+    'views/views_treatments.xml',
+    'views/template_report.xml',
+    'data/sequences.xml',
+    'data/hospital_treatment_data.xml',
+    'data/report_data.xml',
+],
+
     'installable': True,
     'application': True,
     # only loaded in demonstration mode

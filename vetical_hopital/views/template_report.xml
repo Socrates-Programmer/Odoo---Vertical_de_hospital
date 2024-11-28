@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+        <!-- Plantilla QWeb mejorada -->
+        <template id="report_hospital_patient">
+            <t t-call="web.html_container">
+                    <div class="page">
+                        <h2 style="text-align: center; margin-bottom: 20px;">Reporte de Pacientes</h2>
+                        <table class="table" style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                            <thead style="background-color: #f0f0f0; text-align: left; border-bottom: 2px solid #ddd;">
+                                <tr>
+                                    <th style="padding: 8px; border: 1px solid #ddd;">Secuencia</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd;">Nombre Completo</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd;">Apellido</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd;">RNC</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd;">Estado</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd;">Fecha de Admisión</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd;">Tratamientos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="docs" t-as="patient">
+                                    <tr>
+                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">
+                                            <span t-esc="patient.name"/>
+                                        </td>
+                                        <td style="padding: 8px; border: 1px solid #ddd;">
+                                            <span t-esc="patient.full_name"/>
+                                        </td>
+                                        <td style="padding: 8px; border: 1px solid #ddd;">
+                                            <span t-esc="patient.last_name"/>
+                                        </td>
+                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">
+                                            <span t-esc="patient.rnc"/>
+                                        </td>
+                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">
+                                            <span t-esc="patient.state"/>
+                                        </td>
+                                        <td style="padding: 8px; border: 1px solid #ddd;">
+                                            <span t-esc="patient.date_time_admission"/>
+                                        </td>
+                                        <td style="padding: 8px; border: 1px solid #ddd;">
+                                            <span t-esc="patient.treatment_names"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+            </t>
+        </template>
+
+        <!-- Definición del reporte -->
+        <report
+            id="report_hospital_patient"
+            model="hospital.patient"
+            string="Hospital Patient Report"
+            report_type="qweb-pdf"
+            name="vetical_hopital.report_hospital_patient"
+            file="vetical_hopital.report_hospital_patient"
+            attachment_use="True"
+        />
+    </data>
+</odoo>
