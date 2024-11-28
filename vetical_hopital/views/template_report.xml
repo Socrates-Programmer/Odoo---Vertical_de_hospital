@@ -4,14 +4,11 @@
         <template id="report_hospital_patient">
             <t t-call="web.html_container">
                 <div class="page">
-
                     <!-- Header -->
                     <img src="/vetical_hopital/static/img/img.png"/>
-
                     <div style="text-align: center; margin-top: 20px; font-size: 14px;">
                         <h2 style="margin-top: 10px;">Reporte de Pacientes</h2>
                     </div>                        
-                    
                     <table class="table" style="width: 100%; border-collapse: collapse; font-size: 14px;">
                             <thead style="background-color: #f0f0f0; text-align: left; border-bottom: 2px solid #ddd;">
                                 <tr>
@@ -44,7 +41,7 @@
                                 </t>
                             </tbody>
                         </table>
-                                            <!-- Footer -->
+                    <!-- Footer -->
                     <div style="text-align: center; margin-top: 20px; font-size: 14px;">
                         <p>Reporte generado por: Vetical Hospital</p>
                         <p style="font-size: 10px;">Este reporte es confidencial y solo para uso interno.</p>

@@ -44,7 +44,6 @@
 
     <!-- Menú raíz para Hospital Management -->
     <menuitem id="menu_hospital_root" name="Treatments" sequence="1"/>
-
     <!-- Submenú para tratamientos -->
     <menuitem id="menu_treatment_root" name="Treatments" parent="menu_hospital_root" sequence="2" action="action_treatment_management"/>
 

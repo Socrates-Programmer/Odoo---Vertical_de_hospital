@@ -3,8 +3,6 @@
 from odoo import models, fields, api, _ 
 from odoo.exceptions import ValidationError
 import re
-import base64
-import os
 
 
 class HospitalPatient(models.Model):
@@ -21,7 +19,6 @@ class HospitalPatient(models.Model):
         default=lambda self: _('New'), 
         tracking=True
     )
-
     # Nombre completo del paciente
     full_name = fields.Char(
         string="Name",
@@ -29,7 +26,6 @@ class HospitalPatient(models.Model):
         tracking=True,
         default=lambda self: _('')  
     )
-
     # Apellido del paciente
     last_name = fields.Char(
         string="Last Name",
@@ -37,14 +33,12 @@ class HospitalPatient(models.Model):
         tracking=True,
         default=lambda self: _('')  
     )
-    
     # Registro Nacional de Contribuyentes (RNC)
     rnc = fields.Char(
         string="RNC", 
         tracking=True,
         required=True
     )
-
     # Relación con tratamientos
     treatment_ids = fields.Many2many(
         'hospital.treatment', 
@@ -52,7 +46,6 @@ class HospitalPatient(models.Model):
         tracking=True,
         required=True
     )
-
     # Fecha de admisión
     date_time_admission = fields.Datetime(
         string="Admission Date", 
@@ -60,14 +53,12 @@ class HospitalPatient(models.Model):
         required=True, 
         tracking=True
     )
-
     # Fecha de última actualización
     date_time_update = fields.Datetime(
         string="Update Date", 
         readonly=True,
         tracking=True
     )
-
     # Estado del paciente
     state = fields.Selection(
         [
@@ -84,7 +75,6 @@ class HospitalPatient(models.Model):
     def _compute_treatment_names(self):
         for record in self:
             record.treatment_names = ', '.join(record.treatment_ids.mapped('name'))
-
     treatment_names = fields.Char(
         string="Treatment Names",
         compute="_compute_treatment_names",
@@ -95,15 +85,14 @@ class HospitalPatient(models.Model):
         # Filtrar los pacientes seleccionados
         selected_patients = self.env.context.get('active_ids', [])
         patients = self.browse(selected_patients)
-        
         # Generar el reporte para los pacientes seleccionados
         return self.env.ref('vetical_hopital.report_hospital_patient').report_action(patients)
 
+    #Secuancia
     @api.model
     def create(self, vals):
         """Override the create method to set the sequence number"""
         if vals.get('name', _('New')) == _('New'):
-            # Obtener el siguiente número de la secuencia
             vals['name'] = self.env['ir.sequence'].next_by_code('hospital.patient') or _('New')
         return super(HospitalPatient, self).create(vals)
     
@@ -132,21 +121,15 @@ class HospitalPatient(models.Model):
                 raise ValidationError("El RNC debe contener exactamente 9 números.")
 #RNC solo puede tener numeros END
 
-
-
-
 # Actualizar la fecha de modificación al editar cualquier campo
     def write(self, vals):
         """Actualiza la fecha de modificación al editar cualquier campo."""
         vals['date_time_update'] = fields.Datetime.now()  # Actualiza siempre que se haga un cambio
         return super(HospitalPatient, self).write(vals)
     
-#Cambiar estados
     def action_admit(self):
         """Cambia el estado a 'admitted'."""
         self.write({'state': 'admitted'})
-#Cambiar estados ENDS
-
 
     def action_discharge(self):
         """Cambia el estado a 'discharged'."""
@@ -171,21 +154,21 @@ class HospitalTreatment(models.Model):
 #---------------------
 
 #Models de treatments:
-
-# -*- coding: utf-8 -*-
 class TreatmentManagement(models.Model):
     _name = 'treatment.management'
     _description = 'Treatment Management'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    code = fields.Char(string="Código de Tratamiento", required=True, track_visibility="onchange")
+    code = fields.Char(string="Codigo de Tratamiento", required=True, track_visibility="onchange")
     name = fields.Char(string="Nombre del Tratamiento", required=True, track_visibility="onchange")
-    doctor = fields.Char(string="Médico Tratante", required=True, track_visibility="onchange")
-    description = fields.Text(string="Descripción", track_visibility="onchange")  # Campo agregado
+    doctor = fields.Char(string="Medico Tratante", required=True, track_visibility="onchange")
+    description = fields.Text(string="Descripcion", track_visibility="onchange")  # Campo agregado
 
+    #Validacion -- No se puede usar 026 --
     @api.constrains('code')
     def _check_code_restriction(self):
         """Restringe que el código no contenga la secuencia '026'."""
         for record in self:
             if '026' in record.code:
                 raise ValidationError("El código no puede contener la secuencia '026'.")
+    #Validacion -- No se puede usar 026 -- ENDS

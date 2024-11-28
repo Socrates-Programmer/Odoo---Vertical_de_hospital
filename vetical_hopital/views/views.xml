@@ -1,12 +1,12 @@
 <odoo>
 <data>
-
 <!-- 1.3 Pacientes -->
+
 <!-- Vista de formulario para hospital.patient -->
 <record id="view_hospital_patient_form" model="ir.ui.view">
     <field name="name">hospital.patient.form</field>
     <field name="model">hospital.patient</field>
-    <field name="type">form</field> <!-- Tipo de vista -->
+    <field name="type">form</field>
     <field name="arch" type="xml">
         <form string="Patient Form">
             <sheet>
@@ -28,11 +28,10 @@
                 <!-- Estado del paciente -->
                 <group string="Estado">
                     <field name="state" widget="statusbar" clickable="True"/>
-                    
                     <button name="action_admit" string="Admitir" type="object" class="oe_highlight"
-                            invisible="state == 'admitted'"/>
+                        invisible="state == 'admitted'"/>
                     <button name="action_discharge" string="Dar de alta" type="object" class="oe_highlight"
-                            invisible="state == 'discharged'"/>
+                        invisible="state == 'discharged'"/>
                 </group>
 
 
@@ -53,17 +52,13 @@
     <record id="view_hospital_patient_list" model="ir.ui.view">
         <field name="name">hospital.patient.list</field>
         <field name="model">hospital.patient</field>
-        <field name="type">list</field> <!-- Cambiado a "list" -->
+        <field name="type">list</field>
         <field name="arch" type="xml">
             <list string="Patient List">
-                <!-- ID del paciente -->
                 <field name="name"/>
-                <!-- Nombre completo -->
                 <field name="full_name"/>
                 <field name="last_name"/>
-                <!-- Identificación RNC -->
                 <field name="rnc"/>
-                <!-- Estado del paciente -->
                 <field name="state"/>
             </list>
 
@@ -75,7 +70,7 @@
     <record id="action_hospital_patient" model="ir.actions.act_window">
         <field name="name">Patients</field>
         <field name="res_model">hospital.patient</field>
-        <field name="view_mode">list,form</field> <!-- Cambiado a "list,form" -->
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- Menú principal de gestión hospitalaria -->
@@ -90,8 +85,8 @@
             <field name="model">hospital.patient</field> 
             <field name="report_type">qweb-pdf</field> 
             <field name="binding_model_id" ref="vetical_hopital.model_hospital_patient"/>
-            <field name="report_name">vetical_hopital.report_hospital_patient</field> <!-- Identificador único del reporte -->
-            <field name="binding_type">report</field> <!-- Define que está vinculado como reporte -->
+            <field name="report_name">vetical_hopital.report_hospital_patient</field> <!-- Identificador del reporte -->
+            <field name="binding_type">report</field> 
         </record>
 
     </data>
