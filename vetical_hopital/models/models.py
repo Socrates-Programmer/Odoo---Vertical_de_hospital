@@ -3,11 +3,14 @@
 from odoo import models, fields, api, _ 
 from odoo.exceptions import ValidationError
 import re
+import base64
+import os
+
 
 class HospitalPatient(models.Model):
     _name = 'hospital.patient'
     _description = 'Hospital Patient'
-    _inherit = ['mail.thread', 'mail.activity.mixin']  # Habilitar Chatter y actividades
+    _inherit = ['mail.thread', 'mail.activity.mixin'] 
 
     # Identificación única del paciente
     name = fields.Char(

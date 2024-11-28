@@ -86,10 +86,10 @@
 
         <!-- Acción del reporte -->
         <record id="action_hospital_patient_report" model="ir.actions.report">
-            <field name="name">Patient Report</field> <!-- Nombre amigable del reporte -->
-            <field name="model">hospital.patient</field> <!-- Modelo sobre el que se genera el reporte -->
-            <field name="report_type">qweb-pdf</field> <!-- Tipo de reporte: PDF generado con QWeb -->
-            <field name="binding_model_id" ref="vetical_hopital.model_hospital_patient"/> <!-- Referencia al modelo -->
+            <field name="name">Patient Report</field> 
+            <field name="model">hospital.patient</field> 
+            <field name="report_type">qweb-pdf</field> 
+            <field name="binding_model_id" ref="vetical_hopital.model_hospital_patient"/>
             <field name="report_name">vetical_hopital.report_hospital_patient</field> <!-- Identificador único del reporte -->
             <field name="binding_type">report</field> <!-- Define que está vinculado como reporte -->
         </record>

@@ -3,18 +3,23 @@
         <!-- Plantilla QWeb mejorada -->
         <template id="report_hospital_patient">
             <t t-call="web.html_container">
-                    <div class="page">
-                        <h2 style="text-align: center; margin-bottom: 20px;">Reporte de Pacientes</h2>
-                        <table class="table" style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <div class="page">
+
+                    <!-- Header -->
+                    <img src="/vetical_hopital/static/img/img.png"/>
+
+                    <div style="text-align: center; margin-top: 20px; font-size: 14px;">
+                        <h2 style="margin-top: 10px;">Reporte de Pacientes</h2>
+                    </div>                        
+                    
+                    <table class="table" style="width: 100%; border-collapse: collapse; font-size: 14px;">
                             <thead style="background-color: #f0f0f0; text-align: left; border-bottom: 2px solid #ddd;">
                                 <tr>
                                     <th style="padding: 8px; border: 1px solid #ddd;">Secuencia</th>
-                                    <th style="padding: 8px; border: 1px solid #ddd;">Nombre Completo</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd;">Nombre</th>
                                     <th style="padding: 8px; border: 1px solid #ddd;">Apellido</th>
                                     <th style="padding: 8px; border: 1px solid #ddd;">RNC</th>
                                     <th style="padding: 8px; border: 1px solid #ddd;">Estado</th>
-                                    <th style="padding: 8px; border: 1px solid #ddd;">Fecha de Admisión</th>
-                                    <th style="padding: 8px; border: 1px solid #ddd;">Tratamientos</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,20 +37,21 @@
                                         <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">
                                             <span t-esc="patient.rnc"/>
                                         </td>
-                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">
+                                        <td style="padding: 8px; border: 1px solid #ddd;">
                                             <span t-esc="patient.state"/>
-                                        </td>
-                                        <td style="padding: 8px; border: 1px solid #ddd;">
-                                            <span t-esc="patient.date_time_admission"/>
-                                        </td>
-                                        <td style="padding: 8px; border: 1px solid #ddd;">
-                                            <span t-esc="patient.treatment_names"/>
                                         </td>
                                     </tr>
                                 </t>
                             </tbody>
                         </table>
+                                            <!-- Footer -->
+                    <div style="text-align: center; margin-top: 20px; font-size: 14px;">
+                        <p>Reporte generado por: Vetical Hospital</p>
+                        <p style="font-size: 10px;">Este reporte es confidencial y solo para uso interno.</p>
                     </div>
+                        <img src="/vetical_hopital/static/img/img.png"/>
+
+                </div>
             </t>
         </template>
 
